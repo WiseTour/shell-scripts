@@ -11,22 +11,25 @@ sudo systemctl enable docker
 sudo systemctl start docker
 
 # Clona o repositório com os scripts SQL
-git clone https://github.com/WiseTour/database.git /var/database
+git clone https://github.com/WiseTour/database.git /home/ubuntu/wise-tour/database
 
-# Cria um diretório para o Dockerfile
-mkdir -p /var/mysql-docker
-cd /var/mysql-docker
+# Vai até o repositório
+cd /home/ubuntu/wise-tour/database/
 
 # Cria o Dockerfile automaticamente
-touch Dockerfile
-echo "FROM mysql:8.0" >> Dockerfile
-echo "ENV MYSQL_ROOT_PASSWORD=root" >> Dockerfile
-echo "ENV MYSQL_PASSWORD=urubu100" >> Dockerfile
-echo "COPY ./script /docker-entrypoint-initdb.d" >> Dockerfile
-echo "EXPOSE 3306" >> Dockerfile
-# Copia os scripts do repositório clonado para o diretório do Dockerfile
-mkdir -p scripts
-cp /var/database/script/*.sql scripts/
+cat <<EOF > Dockerfile
+FROM mysql:latest
+
+# Define variáveis de ambiente obrigatórias
+ENV MYSQL_ROOT_PASSWORD=root
+ENV MYSQL_DATABASE=wise_tour_db
+ENV MYSQL_PASSWORD=urubu100
+
+# Copia os scripts SQL para o diretório de inicialização do MySQL
+COPY ./script/*.sql /docker-entrypoint-initdb.d/
+
+EXPOSE 3306
+EOF
 
 # Constrói a imagem
 sudo docker build -t mysql-image-wise-tour .
