@@ -35,3 +35,9 @@ sudo docker build -t mysql-image-wise-tour .
 
 # Executa o container
 sudo docker run -d -p 3306:3306 --name mysql-container-wise-tour mysql-image-wise-tour
+
+sudo docker exec -i mysql-wise mysql -uroot -purubu100 <<EOF
+CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY 'urubu100';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+EOF
