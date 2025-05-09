@@ -38,6 +38,22 @@ sudo docker build -t mysql-image-wise-tour .
 # Executa o container
 sudo docker run --restart always -d -p 3306:3306 --name mysql-container-wise-tour mysql-image-wise-tour
 
+# Aguarda até que o MySQL esteja pronto para conexões (timeout: 60s)
+echo "Aguardando o MySQL iniciar..."
+
+timeout=60
+elapsed=0
+until sudo docker logs mysql-container-wise-tour 2>&1 | grep -q "ready for connections"; do
+  sleep 2
+  elapsed=$((elapsed + 2))
+  if [ "$elapsed" -ge "$timeout" ]; then
+    echo "Erro: MySQL não iniciou dentro do tempo esperado."
+    exit 1
+  fi
+done
+
+echo "MySQL pronto para conexões!"
+
 sudo docker exec -it mysql-container-wise-tour mysql -h172.31.24.53 -P3306 -u root -purubu100
  <<EOF
 CREATE USER IF NOT EXISTS 'wiseuser'@'%' IDENTIFIED BY 'urubu100';
