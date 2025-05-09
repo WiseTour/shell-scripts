@@ -24,6 +24,7 @@ EOF
 if sudo docker ps -a --format '{{.Names}}' | grep -q '^mysql-container-wise-tour$'; then
   echo "Removendo container antigo mysql-container-wise-tour..."
   sudo docker rm -f mysql-container-wise-tour
+  sudo docker volume prune -f
 fi
 
 # Verifica e remove a imagem existente
