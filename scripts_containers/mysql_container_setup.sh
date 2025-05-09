@@ -1,15 +1,5 @@
 #!/bin/bash
 
-# Atualiza o sistema
-sudo apt update && sudo apt upgrade -y
-
-# Instala o docker
-sudo apt install  docker.io
-
-# Ativa e inicia o Docker
-sudo systemctl enable docker
-sudo systemctl start docker
-
 # Clona o repositório com os scripts SQL
 git clone https://github.com/WiseTour/database.git /home/ubuntu/wise-tour/database
 
