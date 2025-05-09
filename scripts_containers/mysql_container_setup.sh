@@ -35,8 +35,8 @@ fi
 # Constrói a imagem
 sudo docker build -t mysql-image-wise-tour .
 
-# Executa o container
-sudo docker run --restart always -d -p 3306:3306 --name mysql-container-wise-tour mysql-image-wise-tour
+# Executa o MySQL na rede
+sudo docker run -d --name mysql-container-wise-tour --network wise-network -e MYSQL_ROOT_PASSWORD=urubu100 -e MYSQL_DATABASE=WiseTour -p 3306:3306 mysql-image-wise-tour
 
 # Aguarda até que o MySQL esteja pronto para conexões (timeout: 60s)
 echo "Aguardando o MySQL iniciar..."
