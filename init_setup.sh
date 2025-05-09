@@ -11,6 +11,8 @@ sudo systemctl enable docker && sudo systemctl start docker
 
 cd scripts_containers/
 
+sudo docker network create wise-network
+
 # Configura os scripts para executaveis
 sudo chmod +x mysql_container_setup.sh
 sudo chmod +x site_container_setup.sh
