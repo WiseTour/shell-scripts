@@ -36,7 +36,7 @@ fi
 sudo docker build -t mysql-image-wise-tour .
 
 # Executa o container
-sudo docker run -d -p 3306:3306 --name mysql-container-wise-tour mysql-image-wise-tour
+sudo docker run --restart always -d -p 3306:3306 --name mysql-container-wise-tour mysql-image-wise-tour
 
 sudo docker exec -it mysql-container-wise-tour mysql -hlocalhost -P3306 -u root -p
  <<EOF
