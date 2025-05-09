@@ -22,7 +22,6 @@ FROM mysql:latest
 
 # Define variáveis de ambiente obrigatórias
 ENV MYSQL_ROOT_PASSWORD=root
-ENV MYSQL_DATABASE=wise_tour_db
 ENV MYSQL_PASSWORD=urubu100
 
 # Copia os scripts SQL para o diretório de inicialização do MySQL
