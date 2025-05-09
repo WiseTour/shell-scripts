@@ -23,7 +23,7 @@ WORKDIR /app
 RUN git clone https://github.com/WiseTour/wise-tour.git . \
   && echo "APP_PORT=3333" > .env.dev \
   && echo "APP_HOST=localhost" >> .env.dev \
-  && echo "DB_HOST=localhost" >> .env.dev \
+  && echo "DB_HOST='%'" >> .env.dev \
   && echo "DB_DATABASE='WiseTour'" >> .env.dev \
   && echo "DB_USER='root'" >> .env.dev \
   && echo "DB_PASSWORD='urubu100'" >> .env.dev \
