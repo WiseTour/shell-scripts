@@ -54,9 +54,9 @@ done
 
 echo "MySQL pronto para conexões!"
 
-sudo docker exec -it mysql-container-wise-tour mysql -h172.31.24.53 -P3306 -u root -purubu100
- <<EOF
+sudo docker exec -i mysql-container-wise-tour mysql -u root -purubu100 <<EOF
 CREATE USER IF NOT EXISTS 'wiseuser'@'%' IDENTIFIED BY 'urubu100';
 GRANT ALL PRIVILEGES ON *.* TO 'wiseuser'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 EOF
+
