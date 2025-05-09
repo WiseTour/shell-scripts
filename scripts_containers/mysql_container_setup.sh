@@ -30,6 +30,18 @@ COPY ./script/*.sql /docker-entrypoint-initdb.d/
 EXPOSE 3306
 EOF
 
+# Verifica e remove o container existente
+if sudo docker ps -a --format '{{.Names}}' | grep -q '^mysql-container-wise-tour$'; then
+  echo "Removendo container antigo mysql-container-wise-tour..."
+  sudo docker rm -f mysql-container-wise-tour
+fi
+
+# Verifica e remove a imagem existente
+if sudo docker images --format '{{.Repository}}' | grep -q '^mysql-image-wise-tour$'; then
+  echo "Removendo imagem antiga mysql-image-wise-tour..."
+  sudo docker rmi -f mysql-image-wise-tour
+fi
+
 # Constrói a imagem
 sudo docker build -t mysql-image-wise-tour .
 
