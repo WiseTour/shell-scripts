@@ -23,10 +23,10 @@ WORKDIR /app
 RUN git clone https://github.com/WiseTour/wise-tour.git . \
   && echo "APP_PORT=3333" > .env.dev \
   && echo "APP_HOST=localhost" >> .env.dev \
-  && echo "DB_HOST='44.205.129.76'" >> .env.dev \
+  && echo "DB_HOST=mysql-container-wise-tour" >> .env.dev \
   && echo "DB_DATABASE='WiseTour'" >> .env.dev \
-  && echo "DB_USER='root'" >> .env.dev \
-  && echo "DB_PASSWORD='urubu100'" >> .env.dev \
+  && echo "DB_USER=root" >> .env.dev \
+  && echo "DB_PASSWORD=urubu100" >> .env.dev \
   && echo "DB_PORT=3306" >> .env.dev \
   && npm install
 
@@ -44,6 +44,6 @@ sudo docker build -t node-image-wise-tour .
 # Remove container existente com o mesmo nome, se existir
 sudo docker rm -f aplicacao-node-wise-tour 2>/dev/null || true
 
-# Cria e executa o container da aplicação
-sudo docker run -d --restart always --name aplicacao-node-wise-tour -p 3333:3333 node-image-wise-tour
+# Executa o container Node.js na mesma rede
+sudo docker run -d --name aplicacao-node-wise-tour --network wise-network -p 3333:3333 node-image-wise-tour
 
