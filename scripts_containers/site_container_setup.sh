@@ -25,7 +25,7 @@ RUN git clone https://github.com/WiseTour/wise-tour.git . \
   && echo "APP_HOST=localhost" >> .env.dev \
   && echo "DB_HOST='44.205.129.76'" >> .env.dev \
   && echo "DB_DATABASE='WiseTour'" >> .env.dev \
-  && echo "DB_USER='wiseuser'" >> .env.dev \
+  && echo "DB_USER='root'" >> .env.dev \
   && echo "DB_PASSWORD='urubu100'" >> .env.dev \
   && echo "DB_PORT=3306" >> .env.dev \
   && npm install
