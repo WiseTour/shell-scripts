@@ -68,7 +68,7 @@ else
   # Aqui você pode decidir se quer criar ele de novo
 fi
 
-sudo docker exec -it mysql-container-wise-tour mysql -uroot -purubu100 <<EOF
+sudo docker exec -i mysql-container-wise-tour mysql -uroot -purubu100 <<EOF
 CREATE USER IF NOT EXISTS 'wiseuser'@'%' IDENTIFIED BY 'urubu100';
 GRANT ALL PRIVILEGES ON *.* TO 'wiseuser'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
