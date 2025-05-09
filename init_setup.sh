@@ -12,8 +12,8 @@ sudo systemctl enable docker && sudo systemctl start docker
 cd scripts_containers/
 
 # Configura os scripts para executaveis
-chmod +x mysql_container_setup.sh
-chmod +x site_container_setup.sh
+sudo chmod +x mysql_container_setup.sh
+sudo chmod +x site_container_setup.sh
 
 # Executa os scripts
 ./mysql_container_setup.sh
