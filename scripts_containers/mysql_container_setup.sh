@@ -54,6 +54,20 @@ done
 
 echo "MySQL pronto para conexões!"
 
+# Verifica se o container mysql-container-wise-tour está criado
+if sudo docker ps -a --format '{{.Names}}' | grep -q '^mysql-container-wise-tour$'; then
+  # Verifica se o container está em execução
+  if ! sudo docker ps --format '{{.Names}}' | grep -q '^mysql-container-wise-tour$'; then
+    echo "Container mysql-container-wise-tour existe, mas não está em execução. Iniciando..."
+    sudo docker start mysql-container-wise-tour
+  else
+    echo "Container mysql-container-wise-tour já está em execução."
+  fi
+else
+  echo "Container mysql-container-wise-tour não existe. Abortando ou criando novo container."
+  # Aqui você pode decidir se quer criar ele de novo
+fi
+
 sudo docker exec -i mysql-container-wise-tour mysql -u root -purubu100 <<EOF
 CREATE USER IF NOT EXISTS 'wiseuser'@'%' IDENTIFIED BY 'urubu100';
 GRANT ALL PRIVILEGES ON *.* TO 'wiseuser'@'%' WITH GRANT OPTION;
