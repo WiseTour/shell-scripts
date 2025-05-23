@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8
+    container_name: mysql-container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: urubu100
+      MYSQL_DATABASE: WiseTour
+      MYSQL_USER: user-node
+      MYSQL_PASSWORD: urubu100
+    ports:
+      - "3306:3306"
+    volumes:
+      - dados_mysql:/var/lib/mysql
+      - ./mysql/database/script:/docker-entrypoint-initdb.d
+    networks:
+      - app-network
+
+  node:
+    container_name: node-container
+    build:
+      context: ./node-app
+      dockerfile: Dockerfile
+    ports:
+      - "3333:3333"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: user-node
+      DB_PASSWORD: urubu100
+      DB_NAME: WiseTour
+    networks:
+      - app-network
+volumes:
+  dados_mysql:
+
+networks:
+  app-network:
+    driver: bridge
