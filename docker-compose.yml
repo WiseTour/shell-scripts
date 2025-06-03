@@ -35,6 +35,23 @@ services:
       DB_NAME: WiseTour
     networks:
       - app-network
+  java:
+    container_name: java-container
+    build:
+      context: ./java
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: user-java
+      DB_PASSWORD: urubu100
+      DB_NAME: WiseTour
+    networks:
+      - app-network
 volumes:
   dados_mysql:
 
