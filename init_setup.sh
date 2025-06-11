@@ -3,14 +3,22 @@
 set -e  # Encerra o script se qualquer comando falhar
 
 echo "=== Atualizando o sistema ==="
+set -e  # Encerra o script se qualquer comando falhar
+
+echo "=== Atualizando o sistema ==="
 sudo apt update && sudo apt upgrade -y
 
+echo "=== Instalando Docker ==="
 echo "=== Instalando Docker ==="
 sudo apt install -y docker.io
 
 echo "=== Ativando o serviço Docker ==="
+echo "=== Ativando o serviço Docker ==="
 sudo systemctl enable docker && sudo systemctl start docker
 
+echo "=== Instalando Docker Compose ==="
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" \
+  -o /usr/local/bin/docker-compose
 echo "=== Instalando Docker Compose ==="
 sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" \
   -o /usr/local/bin/docker-compose
@@ -41,5 +49,7 @@ else
   echo "Repositório não encontrado. Clonando com git clone..."
   git clone "$REPO_URL" "$DEST_DIR"
 fi
+
+echo "✅ Configuração inicial finalizada com sucesso!"
 
 echo "✅ Configuração inicial finalizada com sucesso!"
